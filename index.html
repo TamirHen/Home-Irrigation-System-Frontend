@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel='icon' href='./favicon.ico' type='image/x-icon'>
+    <link rel="stylesheet" type="text/css" href="default.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Irrigation System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <form class="main-container">
+        <div class="header">Smart Irrigation System</div>
+        <div class="main-body">
+            <div class="wrapper">
+
+                <div class="wrapper">
+                    <div class="cycles">
+                        <div class="cycle">
+                            <div class="header-wrapper">
+                                <span class="mh2">First Cycle</span>
+                                <div class="mid">
+                                    <label class="rocker rocker-small">
+                                    <input type="checkbox" id="cycle1">
+                                    <span class="switch-left">ON</span>
+                                    <span class="switch-right">OFF</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="time-picker">
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">Start</label>
+                                    <input type="time" name="time" id="time" id="time1Start" />
+                                </div>
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">End</label>
+                                    <input type="time" name="time" id="time" id="time1End" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cycle">
+                            <div class="header-wrapper">
+                                <span class="mh2">Second Cycle</span>
+                                <div class="mid">
+                                    <label class="rocker rocker-small">
+                                    <input type="checkbox" id="cycle2">
+                                    <span class="switch-left">ON</span>
+                                    <span class="switch-right">OFF</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="time-picker">
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">Start</label>
+                                    <input type="time" name="time" id="time" id="time2Start" />
+                                </div>
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">End</label>
+                                    <input type="time" name="time" id="time" id="time2End" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cycle">
+                            <div class="header-wrapper">
+                                <span class="mh2">Third Cycle</span>
+                                <div class="mid">
+                                    <label class="rocker rocker-small">
+                                    <input type="checkbox" id="cycle3">
+                                    <span class="switch-left">ON</span>
+                                    <span class="switch-right">OFF</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="time-picker">
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">Start</label>
+                                    <input type="time" name="time" id="time" id="time3Start" />
+                                </div>
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">End</label>
+                                    <input type="time" name="time" id="time" id="time3End" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+
+                <div class="week">     
+                    
+                    <ol class="switches">
+                        <li>
+                            <input type="checkbox" id="1" class="switch-input">
+                            <label for="1">
+                                <span class="mh3">Sunday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="2">
+                            <label for="2">
+                                <span class="mh3">Monday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="3">
+                            <label for="3">
+                                <span class="mh3">Tuesday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="4">
+                            <label for="4">
+                                <span class="mh3">Wednesday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="5">
+                            <label for="5">
+                                <span class="mh3">Thursday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="6">
+                            <label for="6">
+                                <span class="mh3">Friday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="7">
+                            <label for="7">
+                                <span class="mh3">Saturday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="save-wrapper">
+            <button type="submit" class="submit-button">Save</button>
+        </div>
+        <div class="logout-wrapper">
+            <button class="logout-button" id="logout-button">Logout</button>
+        </div>
+
+    </form>
+
+    <div class="login-background"></div>
+
+    <form class="login-wrapper" id="login-popup">
+        <div class="login-popup">
+            <span class="signin-label">Sign in</span>
+            <input type="text" placeholder="Email" class="popup-input" id="email-input-signin">
+            <input type="password" placeholder="Password" class="popup-input" id="password-input-signin">
+            <button type="submit" class="login-button" id="signin-submit">Submit</button>
+            <span id="signin-error-message" class="error-message"></span>
+            <div class="signup-wrapper">
+                <button class="signup" id="signup">Sign up</button>
+            </div>
+        </div>
+    </form>
+
+    <form class="login-wrapper" id="signup-popup">
+        <div class="login-popup">
+            <span class="signin-label">Sign up</span>
+            <input type="text" placeholder="Email" class="popup-input" id="email-input-signup">
+            <input type="password" placeholder="Password" class="popup-input" id="password-input-signup">
+            <input type="text" placeholder="Dataplicity" class="popup-input" id="dataplicity-input-signup">
+            <button type="submit" class="login-button" id="signup-submit">Submit</button>
+            <span id="signup-error-message" class="error-message"></span>
+            <div class="signup-wrapper">
+                <button class="signup" id="back-to-login">Back to login</button>
+            </div>
+        </div>
+    </form>
+
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-analytics.js"></script>
+  
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyCmWhdLsNWdcoy5n73aVuX2Wb17Qkw4MKw",
+      authDomain: "smart-irrigation-system-854fa.firebaseapp.com",
+      databaseURL: "https://smart-irrigation-system-854fa.firebaseio.com",
+      projectId: "smart-irrigation-system-854fa",
+      storageBucket: "smart-irrigation-system-854fa.appspot.com",
+      messagingSenderId: "175621433547",
+      appId: "1:175621433547:web:f80840fa5b9790147cd34e",
+      measurementId: "G-C6JDMHJCFC"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+  
+    
+    <script type="text/javascript">
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        let userEmail;
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        document.querySelector("#time").addEventListener("input", function(e) {
+        const reTime = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
+        const time = this.value;
+            if (reTime.exec(time)) {
+                const minute = Number(time.substring(3,5));
+                const hour = Number(time.substring(0,2)) % 12 + (minute / 60);
+                this.style.backgroundImage = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><circle cx='20' cy='20' r='18.5' fill='none' stroke='%23222' stroke-width='3' /><path d='M20,4 20,8 M4,20 8,20 M36,20 32,20 M20,36 20,32' stroke='%23bbb' stroke-width='1' /><circle cx='20' cy='20' r='2' fill='%23222' stroke='%23222' stroke-width='2' /></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><path d='M18.5,24.5 19.5,4 20.5,4 21.5,24.5 Z' fill='%23222' style='transform:rotate(${360 * minute / 60}deg); transform-origin: 50% 50%;' /></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><path d='M18.5,24.5 19.5,8.5 20.5,8.5 21.5,24.5 Z' style='transform:rotate(${360 * hour / 12}deg); transform-origin: 50% 50%;' /></svg>")`;
+            }
+        });
+
+        $(document).ready(function() {
+            $("#signup-popup").hide();
+        });
+
+        $("#signup").click(function(e) {
+            e.preventDefault();
+            $("#login-popup").hide();
+            $("#signup-popup").show();
+        })
+
+        $("#back-to-login").click(function(e) {
+            e.preventDefault();
+            $("#login-popup").show();
+            $("#signup-popup").hide();
+        })
+
+        $("#signup-submit").click(function(e) {
+            e.preventDefault();
+            const email = $("#email-input-signup").val();
+            const password = $("#password-input-signup").val();
+            const dataplicityWormhole = $("#dataplicity-input-signup").val();
+            auth.createUserWithEmailAndPassword(email, password).then(cred => {
+                $("#signup-popup").hide();
+                $("#login-popup").hide();
+                $(".login-background").hide();
+                db.collection("users").doc(email).set({
+                    dataplicity: dataplicityWormhole
+                });
+                userEmail = email;
+            }, function(error) {
+                $("#signup-error-message").text(error.message);
+                $("#signup-error-message").show();
+            });
+        });
+
+        $("#signin-submit").click(function(e) {
+            e.preventDefault();
+            const email = $("#email-input-signin").val();
+            const password = $("#password-input-signin").val();
+            auth.signInWithEmailAndPassword(email, password).then(cred => {
+                $("#signup-popup").hide();
+                $("#login-popup").hide();
+                $(".login-background").hide();
+                userEmail = email;
+            }, function(err) {
+                $("#signin-error-message").text(err.message);
+                $("#signin-error-message").show();
+            });
+        });
+
+        $("#logout-button").click(function(e) {
+            e.preventDefault();
+            auth.signOut().then(cred => {
+                $("#login-popup").show();
+                $("#login-popup").trigger('reset');
+                $("#logup-popup").trigger('reset');
+                $(".login-background").show();
+                $(".login-background").trigger('reset');
+                $(".main-container").trigger('reset');
+                $("#signin-error-message").hide();
+                $("#signup-error-message").hide();
+                userEmail = "";
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }, function(error) {
+                console.log(errror.message);
+            });
+        });
+
+        $(".submit-button").click(function(e) {
+            e.preventDefault();
+            cycle1StartTime = null;
+            cycle2StartTime = null;
+            cycle3StartTime = null;
+            cycle1EndTime = null;
+            cycle2EndTime = null;
+            cycle3EndTime = null;
+            if ($("#cycle1").val() === true) {
+                cycle1StartTime = $("#time1Start").val();
+                cycle1EndTime = $("#time1End").val();
+            }
+            if ($("#cycle2").val() === true) {
+                cycle2StartTime = $("#time2Start").val();
+                cycle2EndTime = $("#time2End").val();
+            }
+            if ($("#cycle3").val() === true) {
+                cycle3StartTime = $("#time3Start").val();
+                cycle3EndTime = $("#time3End").val();
+            }
+            db.collection("users").doc(userEmail).get().then(function(user) {
+                if (user.exists) {
+                    // var settings = {
+                    //     "url": `${user.data()["dataplicity"]}/update_week`,
+                    //     "method": "POST",
+                    //     "timeout": 0,
+                    //     "headers": {
+                    //         "Content-Type": "application/json"
+                    //     },
+                    //     "data": JSON.stringify({
+                    //         "sunday":$("#1").val() === 'on' ? true : false,
+                    //         "monday":$("#2").val() === 'on' ? true : false,
+                    //         "tuesday":$("#3").val() === 'on' ? true : false,
+                    //         "wednesday":$("#4").val() === 'on' ? true : false,
+                    //         "thursday":$("#5").val() === 'on' ? true : false,
+                    //         "friday":$("#6").val() === 'on' ? true : false,
+                    //         "saturday":$("#7").val() === 'on' ? true : false,
+                    //         "firstRoundStart":cycle1StartTime,
+                    //         "firstRoundEnd":cycle1EndTime,
+                    //         "secondRoundStart":cycle2StartTime,
+                    //         "secondRoundEnd":cycle2EndTime,
+                    //         "thirdRoundStart":cycle3StartTime,
+                    //         "thirdRoundEnd":cycle3EndTime
+                    //     }),
+                    // };
+                    // $.ajax(settings).done(function (response) {
+                    // console.log(response);
+                    // });
+                    var settings = {
+                            "url": "https://ambrosial-scorpion-9037.dataplicity.io/update_week",
+                            "method": "POST",
+                            "timeout": 0,
+                            "headers": {
+                                "Content-Type": "application/json"
+                            },
+                            "data": JSON.stringify({"sunday":true,"monday":true,"tuesday":true,"wednesday":true,"thursday":true,"friday":true,"saturday":true,"firstRoundStart":"03:00:00","firstRoundEnd":"03:10:00","secondRoundStart":"14:00:00","secondRoundEnd":"14:02:00","thirdRoundStart":null,"thirdRoundEnd":null}),
+                        };
+
+                        $.ajax(settings).done(function (response) {
+                        console.log(response);
+                    });
+                } else {
+                    console.log("No such document");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+            });
+
+        
+        
+    </script>
+</body>
+</html>
