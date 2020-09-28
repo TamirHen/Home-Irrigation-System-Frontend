@@ -94,7 +94,6 @@ html, body {
 
 #time {
     width: 192px;
-    height: 50px;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
@@ -472,6 +471,8 @@ html {
     font-size: var(--size);
     padding: var(--margin) var(--margin) var(--margin) var(--marginLeft);
     transition: backgroundImage 0.25s;
+    height: 50px;
+    border-color: var(--bgColor);
   }
 
   #time:focus {
