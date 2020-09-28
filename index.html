@@ -158,8 +158,8 @@
     <form class="login-wrapper" id="login-popup">
         <div class="login-popup">
             <span class="signin-label">Sign in</span>
-            <input type="text" placeholder="Email" class="popup-input" id="email-input-signin">
-            <input type="password" placeholder="Password" class="popup-input" id="password-input-signin">
+            <input type="text" placeholder="Email" class="popup-input" id="email-input-signin" required>
+            <input type="password" placeholder="Password" class="popup-input" id="password-input-signin" required>
             <button type="submit" class="login-button" id="signin-submit">Submit</button>
             <span id="signin-error-message" class="error-message"></span>
             <div class="signup-wrapper">
@@ -171,9 +171,9 @@
     <form class="login-wrapper" id="signup-popup">
         <div class="login-popup">
             <span class="signin-label">Sign up</span>
-            <input type="text" placeholder="Email" class="popup-input" id="email-input-signup">
-            <input type="password" placeholder="Password" class="popup-input" id="password-input-signup">
-            <input type="text" placeholder="Dataplicity" class="popup-input" id="dataplicity-input-signup">
+            <input type="text" placeholder="Email" class="popup-input" id="email-input-signup" required>
+            <input type="password" placeholder="Password" class="popup-input" id="password-input-signup" required>
+            <input type="text" placeholder="Dataplicity" class="popup-input" id="dataplicity-input-signup" required>
             <button type="submit" class="login-button" id="signup-submit">Submit</button>
             <span id="signup-error-message" class="error-message"></span>
             <div class="signup-wrapper">
@@ -244,24 +244,36 @@
             $("#signup-popup").hide();
         })
 
-        $("#signup-submit").click(function(e) {
+        $("#signup-popup").submit(function(e) {
             e.preventDefault();
             const email = $("#email-input-signup").val();
             const password = $("#password-input-signup").val();
             const dataplicityWormhole = $("#dataplicity-input-signup").val();
-            auth.createUserWithEmailAndPassword(email, password).then(cred => {
-                db.collection("users").doc(email).set({
-                    dataplicity: dataplicityWormhole
-                });
-                userEmail = email;
-                login();
-            }, function(error) {
-                $("#signup-error-message").text(error.message);
-                $("#signup-error-message").show();
-            });
+            $.ajax({
+                url: `${dataplicityWormhole}/get_week`,
+                type: "GET",
+                success: function(response) {
+                    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+                    db.collection("users").doc(email).set({
+                        dataplicity: dataplicityWormhole
+                    });
+                    userEmail = email;
+                    console.log(response);
+                    drowData(response);
+                    }, function(error) {
+                        $("#signup-error-message").text(error.message);
+                        $("#signup-error-message").show();
+                    });
+
+                },
+                error: function(error) {
+                    console.log(error);
+                    $("#signup-error-message").text("Incorrect Dataplicity wormhole");
+                }
+            })
         });
 
-        $("#signin-submit").click(function(e) {
+        $("#login-popup").submit(function(e) {
             e.preventDefault();
             const email = $("#email-input-signin").val();
             const password = $("#password-input-signin").val();
@@ -275,7 +287,7 @@
         });
 
         $("#logout-button").click(function(e) {
-            e.preventDefault();
+            // e.preventDefault();
             auth.signOut().then(cred => {
                 $("#login-popup").show();
                 $("#login-popup").trigger('reset');
@@ -360,7 +372,6 @@
         });
 
         function login() {
-
             db.collection("users").doc(userEmail).get().then(function(user) {
                 if (user.exists) {
                     $.ajax({
@@ -368,14 +379,8 @@
                         type: "GET",
                         success: function(response) {
                             console.log(response);
-                            $("#signup-popup").hide();
-                            $("#login-popup").hide();
-                            $(".login-background").hide();
-
-                            // set dom objects:
-                            $("#cycle1").prop('checked', response[""])
-
-                        },
+                            drowData(response);
+                                                },
                         error: function(error) {
                             console.log(error);
                         }
@@ -385,12 +390,35 @@
                 }
             }).catch(function(error) {
                 console.log("Error getting document:", error);
-            });
-
-
-
-            
+            });  
         };
+
+        function drowData(response) {
+            $("#signup-popup").hide();
+            $("#login-popup").hide();
+            $(".login-background").hide();
+
+            // set dom objects:
+            $("#cycle1").prop('checked', response["isFirstRoundActive"]);
+            $("#cycle2").prop('checked', response["isSecondRoundActive"]);
+            $("#cycle3").prop('checked', response["isThirdRoundActive"]);
+
+            $(".time1Start").val(response["firstRoundStart"]);
+            $(".time1End").val(response["firstRoundEnd"]);
+            $(".time2Start").val(response["secondRoundStart"]);
+            $(".time2End").val(response["secondRoundEnd"]);
+            $(".time3Start").val(response["thirdRoundStart"]);
+            $(".time3End").val(response["thirdRoundEnd"]);
+
+            $("#1").prop('checked', response["sunday"]);
+            $("#2").prop('checked', response["monday"]);
+            $("#3").prop('checked', response["tuesday"]);
+            $("#4").prop('checked', response["wednesday"]);
+            $("#5").prop('checked', response["thursday"]);
+            $("#6").prop('checked', response["friday"]);
+            $("#7").prop('checked', response["saturday"]);
+
+        }
         
         
     </script>
