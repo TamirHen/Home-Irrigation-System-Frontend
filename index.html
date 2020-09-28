@@ -13,6 +13,9 @@
 <body>
     <form class="main-container">
         <div class="header">Smart Irrigation System</div>
+        <div class="irrigate-by-minutes-wrapper">
+            <button class="irrigate-by-minutes-button">Irrigate By Minutes</button>
+        </div>
         <div class="main-body">
             <div class="wrapper">
 
@@ -183,6 +186,19 @@
         </div>
     </form>
 
+    <form class="login-wrapper" id="irrigate-by-minutes">
+        <div class="login-popup">
+            <span class="signin-label">For how long would you like to irrigate?</span>
+            <input type="number" placeholder="Enter Minutes" class="popup-input" id="minutes-input" required>
+            <div class="buttons-wrapper">
+                <button class="login-button" id="close-button">Close</button>
+                <button type="submit" class="login-button" id="irrigate-by-mintues-submit">Submit</button>
+            </div>
+            <div id="error-message-irrigate-by-minutes"><p></p></div>
+        </div>
+    </form>
+
+
   <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
   <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -231,6 +247,7 @@
 
         $(document).ready(function() {
             $("#signup-popup").hide();
+            $("#irrigate-by-minutes").hide();
         });
 
         $("#signup").click(function(e) {
@@ -418,6 +435,56 @@
 
         }
         
+        $(".irrigate-by-minutes-button").click(function(e) {
+            e.preventDefault();
+            $(".login-background").show();
+            $("#irrigate-by-minutes").show();
+        });
+
+        $("#irrigate-by-minutes").submit(function(e) {
+            e.preventDefault();
+
+            db.collection("users").doc(userEmail).get().then(function(user) {
+                if (user.exists) {
+
+                    $.ajax({
+                        url: `${user.data()["dataplicity"]}/irrigate_by_minutes/${$("#minutes-input").val()}`,
+                        type: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            $(".login-background").hide();
+                            $("#irrigate-by-minutes").hide();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                            $("#error-message-irrigate-by-minutes").text("There was a problem");
+                            $("#error-message-irrigate-by-minutes").css('color', 'red');
+                        }
+                    })
+
+                } else {
+                    console.log("No such document");
+                    $("#error-message-irrigate-by-minutes").text("There was a problem");
+                    $("#error-message-irrigate-by-minutes").css('color', 'red');
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+                $("#error-message-irrigate-by-minutes").text("There was a problem");
+                $("#error-message-irrigate-by-minutes").css('color', 'red');
+
+            });
+
+        });
+
+        $("#close-button").click(function(e) {
+            e.preventDefault();
+            $(".login-background").hide();
+            $("#irrigate-by-minutes").hide();
+        });
+
         
     </script>
 </body>

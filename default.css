@@ -50,6 +50,27 @@ html, body {
     padding-bottom: 10px;
 }
 
+.irrigate-by-minutes-wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.irrigate-by-minutes-button {
+  font-size: 22px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  overflow: hidden;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+
+}
+
 .main-body {
     display: flex;
     justify-content: center;
@@ -130,7 +151,7 @@ html, body {
     /* color: white; */
 }
 
-#submit-message {
+#submit-message,  #error-message-irrigate-by-minutes{
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
@@ -517,6 +538,8 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    padding: 0px 15px;
   }
 
   .signin-label {
@@ -566,6 +589,10 @@ html {
       color: red;
       font-size: 14px;
       text-align: center;
+  }
+
+  #close-button {
+    margin-right: 5px;
   }
 
   @media screen and (max-width: 550px) {
