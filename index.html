@@ -32,11 +32,11 @@
                             <div class="time-picker">
                                 <div class="time-picker-wrapper">
                                     <label class="time-label">Start</label>
-                                    <input type="time" name="time" id="time" id="time1Start" />
+                                    <input type="time" name="time" id="time" class="time1Start" />
                                 </div>
                                 <div class="time-picker-wrapper">
                                     <label class="time-label">End</label>
-                                    <input type="time" name="time" id="time" id="time1End" />
+                                    <input type="time" name="time" id="time" class="time1End" />
                                 </div>
                             </div>
                         </div>
@@ -54,11 +54,11 @@
                             <div class="time-picker">
                                 <div class="time-picker-wrapper">
                                     <label class="time-label">Start</label>
-                                    <input type="time" name="time" id="time" id="time2Start" />
+                                    <input type="time" name="time" id="time" class="time2Start" />
                                 </div>
                                 <div class="time-picker-wrapper">
                                     <label class="time-label">End</label>
-                                    <input type="time" name="time" id="time" id="time2End" />
+                                    <input type="time" name="time" id="time" class="time2End" />
                                 </div>
                             </div>
                         </div>
@@ -76,11 +76,11 @@
                             <div class="time-picker">
                                 <div class="time-picker-wrapper">
                                     <label class="time-label">Start</label>
-                                    <input type="time" name="time" id="time" id="time3Start" />
+                                    <input type="time" name="time" id="time" class="time3Start" />
                                 </div>
                                 <div class="time-picker-wrapper">
                                     <label class="time-label">End</label>
-                                    <input type="time" name="time" id="time" id="time3End" />
+                                    <input type="time" name="time" id="time" class="time3End" />
                                 </div>
                             </div>
                         </div>
@@ -250,13 +250,11 @@
             const password = $("#password-input-signup").val();
             const dataplicityWormhole = $("#dataplicity-input-signup").val();
             auth.createUserWithEmailAndPassword(email, password).then(cred => {
-                $("#signup-popup").hide();
-                $("#login-popup").hide();
-                $(".login-background").hide();
                 db.collection("users").doc(email).set({
                     dataplicity: dataplicityWormhole
                 });
                 userEmail = email;
+                login();
             }, function(error) {
                 $("#signup-error-message").text(error.message);
                 $("#signup-error-message").show();
@@ -268,10 +266,8 @@
             const email = $("#email-input-signin").val();
             const password = $("#password-input-signin").val();
             auth.signInWithEmailAndPassword(email, password).then(cred => {
-                $("#signup-popup").hide();
-                $("#login-popup").hide();
-                $(".login-background").hide();
                 userEmail = email;
+                login();
             }, function(err) {
                 $("#signin-error-message").text(err.message);
                 $("#signin-error-message").show();
@@ -304,67 +300,97 @@
             cycle1EndTime = null;
             cycle2EndTime = null;
             cycle3EndTime = null;
-            if ($("#cycle1").val() === true) {
-                cycle1StartTime = $("#time1Start").val();
-                cycle1EndTime = $("#time1End").val();
+
+            $(".time1Start").val() === "" ? cycle1StartTime = null : cycle1StartTime = $(".time1Start").val();
+            $(".time1End").val() === "" ? cycle1EndTime = null : cycle1EndTime = $(".time1End").val();
+            $(".time2Start").val() === "" ? cycle2StartTime = null : cycle2StartTime = $(".time2Start").val();
+            $(".time2End").val() === "" ? cycle2EndTime = null : cycle2EndTime = $(".time2End").val();
+            $(".time3Start").val() === "" ? cycle3StartTime = null : cycle3StartTime = $(".time3Start").val();
+            $(".time3End").val() === "" ? cycle3EndTime = null : cycle3EndTime = $(".time3End").val();
+
+            if ($("#cycle1").is(':checked')) {
+                cycle1StartTime = $(".time1Start").val();
+                cycle1EndTime = $(".time1End").val();
             }
-            if ($("#cycle2").val() === true) {
-                cycle2StartTime = $("#time2Start").val();
-                cycle2EndTime = $("#time2End").val();
+            if ($("#cycle2").is(':checked')) {
+                cycle2StartTime = $(".time2Start").val();
+                cycle2EndTime = $(".time2End").val();
             }
-            if ($("#cycle3").val() === true) {
-                cycle3StartTime = $("#time3Start").val();
-                cycle3EndTime = $("#time3End").val();
+            if ($("#cycle3").is(':checked')) {
+                cycle3StartTime = $(".time3Start").val();
+                cycle3EndTime = $(".time3End").val();
             }
             db.collection("users").doc(userEmail).get().then(function(user) {
                 if (user.exists) {
-                    // var settings = {
-                    //     "url": `${user.data()["dataplicity"]}/update_week`,
-                    //     "method": "POST",
-                    //     "timeout": 0,
-                    //     "headers": {
-                    //         "Content-Type": "application/json"
-                    //     },
-                    //     "data": JSON.stringify({
-                    //         "sunday":$("#1").val() === 'on' ? true : false,
-                    //         "monday":$("#2").val() === 'on' ? true : false,
-                    //         "tuesday":$("#3").val() === 'on' ? true : false,
-                    //         "wednesday":$("#4").val() === 'on' ? true : false,
-                    //         "thursday":$("#5").val() === 'on' ? true : false,
-                    //         "friday":$("#6").val() === 'on' ? true : false,
-                    //         "saturday":$("#7").val() === 'on' ? true : false,
-                    //         "firstRoundStart":cycle1StartTime,
-                    //         "firstRoundEnd":cycle1EndTime,
-                    //         "secondRoundStart":cycle2StartTime,
-                    //         "secondRoundEnd":cycle2EndTime,
-                    //         "thirdRoundStart":cycle3StartTime,
-                    //         "thirdRoundEnd":cycle3EndTime
-                    //     }),
-                    // };
-                    // $.ajax(settings).done(function (response) {
-                    // console.log(response);
-                    // });
                     var settings = {
-                            "url": "https://ambrosial-scorpion-9037.dataplicity.io/update_week",
-                            "method": "POST",
-                            "timeout": 0,
-                            "headers": {
-                                "Content-Type": "application/json"
-                            },
-                            "data": JSON.stringify({"sunday":true,"monday":true,"tuesday":true,"wednesday":true,"thursday":true,"friday":true,"saturday":true,"firstRoundStart":"03:00:00","firstRoundEnd":"03:10:00","secondRoundStart":"14:00:00","secondRoundEnd":"14:02:00","thirdRoundStart":null,"thirdRoundEnd":null}),
-                        };
-
-                        $.ajax(settings).done(function (response) {
-                        console.log(response);
-                    });
+                        "url": `${user.data()["dataplicity"]}/update_week`,
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "data": JSON.stringify({
+                            "sunday":$("#1").is(':checked'),
+                            "monday":$("#2").is(':checked'),
+                            "tuesday":$("#3").is(':checked'),
+                            "wednesday":$("#4").is(':checked'),
+                            "thursday":$("#5").is(':checked'),
+                            "friday":$("#6").is(':checked'),
+                            "saturday":$("#7").is(':checked'),
+                            "firstRoundStart":cycle1StartTime,
+                            "firstRoundEnd":cycle1EndTime,
+                            "secondRoundStart":cycle2StartTime,
+                            "secondRoundEnd":cycle2EndTime,
+                            "thirdRoundStart":cycle3StartTime,
+                            "thirdRoundEnd":cycle3EndTime,
+                            "isFirstRoundActive": $("#cycle1").is(':checked'),
+                            "isSecondRoundActive": $("#cycle2").is(':checked'),
+                            "isThirdRoundActive": $("#cycle3").is(':checked')
+                        }),
+                    };
+                    $.ajax(settings).done(function (response) {
+                    console.log(response);
+                });
                 } else {
                     console.log("No such document");
                 }
             }).catch(function(error) {
                 console.log("Error getting document:", error);
             });
+        });
+
+        function login() {
+
+            db.collection("users").doc(userEmail).get().then(function(user) {
+                if (user.exists) {
+                    $.ajax({
+                        url: `${user.data()["dataplicity"]}/get_week`,
+                        type: "GET",
+                        success: function(response) {
+                            console.log(response);
+                            $("#signup-popup").hide();
+                            $("#login-popup").hide();
+                            $(".login-background").hide();
+
+                            // set dom objects:
+                            $("#cycle1").prop('checked', response[""])
+
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    })
+                } else {
+                    console.log("No such document");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
             });
 
+
+
+            
+        };
         
         
     </script>
