@@ -557,6 +557,10 @@ html {
       font-weight: bold;
   }
 
+  #logout-button {
+    margin-left: 25px;
+  }
+
   .error-message {
       padding-top: 20px;
       color: red;
