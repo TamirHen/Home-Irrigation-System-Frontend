@@ -146,6 +146,7 @@
         </div>
         <div class="save-wrapper">
             <button type="submit" class="submit-button">Save</button>
+            <div id="submit-message"><p></p></div>
         </div>
         <div class="logout-wrapper">
             <button class="logout-button" id="logout-button">Logout</button>
@@ -304,7 +305,7 @@
             });
         });
 
-        $(".submit-button").click(function(e) {
+        $(".main-container").submit(function(e) {
             e.preventDefault();
             cycle1StartTime = null;
             cycle2StartTime = null;
@@ -313,35 +314,21 @@
             cycle2EndTime = null;
             cycle3EndTime = null;
 
-            $(".time1Start").val() === "" ? cycle1StartTime = null : cycle1StartTime = $(".time1Start").val();
-            $(".time1End").val() === "" ? cycle1EndTime = null : cycle1EndTime = $(".time1End").val();
-            $(".time2Start").val() === "" ? cycle2StartTime = null : cycle2StartTime = $(".time2Start").val();
-            $(".time2End").val() === "" ? cycle2EndTime = null : cycle2EndTime = $(".time2End").val();
-            $(".time3Start").val() === "" ? cycle3StartTime = null : cycle3StartTime = $(".time3Start").val();
-            $(".time3End").val() === "" ? cycle3EndTime = null : cycle3EndTime = $(".time3End").val();
+            $(".time1Start").val() === "" ? cycle1StartTime = null : cycle1StartTime = $(".time1Start").val() + ":00";
+            $(".time1End").val() === "" ? cycle1EndTime = null : cycle1EndTime = $(".time1End").val() + ":00";
+            $(".time2Start").val() === "" ? cycle2StartTime = null : cycle2StartTime = $(".time2Start").val() + ":00";
+            $(".time2End").val() === "" ? cycle2EndTime = null : cycle2EndTime = $(".time2End").val() + ":00";
+            $(".time3Start").val() === "" ? cycle3StartTime = null : cycle3StartTime = $(".time3Start").val() + ":00";
+            $(".time3End").val() === "" ? cycle3EndTime = null : cycle3EndTime = $(".time3End").val() + ":00";
 
-            if ($("#cycle1").is(':checked')) {
-                cycle1StartTime = $(".time1Start").val();
-                cycle1EndTime = $(".time1End").val();
-            }
-            if ($("#cycle2").is(':checked')) {
-                cycle2StartTime = $(".time2Start").val();
-                cycle2EndTime = $(".time2End").val();
-            }
-            if ($("#cycle3").is(':checked')) {
-                cycle3StartTime = $(".time3Start").val();
-                cycle3EndTime = $(".time3End").val();
-            }
             db.collection("users").doc(userEmail).get().then(function(user) {
                 if (user.exists) {
-                    var settings = {
-                        "url": `${user.data()["dataplicity"]}/update_week`,
-                        "method": "POST",
-                        "timeout": 0,
-                        "headers": {
-                            "Content-Type": "application/json"
-                        },
-                        "data": JSON.stringify({
+
+                    $.ajax({
+                        url: `${user.data()["dataplicity"]}/update_week`,
+                        type: "POST",
+                        data:                         
+                            JSON.stringify({
                             "sunday":$("#1").is(':checked'),
                             "monday":$("#2").is(':checked'),
                             "tuesday":$("#3").is(':checked'),
@@ -359,10 +346,21 @@
                             "isSecondRoundActive": $("#cycle2").is(':checked'),
                             "isThirdRoundActive": $("#cycle3").is(':checked')
                         }),
-                    };
-                    $.ajax(settings).done(function (response) {
-                    console.log(response);
-                });
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            $("#submit-message").text("Saved!");
+                            $("#submit-message").css('color', 'green');
+                        },
+                        error: function(error) {
+                            console.log(error);
+                            $("#submit-message").text("Error!");
+                            $("#submit-message").css('color', 'red');
+                        }
+                    })
+
                 } else {
                     console.log("No such document");
                 }

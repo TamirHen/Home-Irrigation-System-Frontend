@@ -98,6 +98,9 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .save-wrapper {
@@ -125,6 +128,13 @@ html, body {
 .submit-button:hover {
     background-color: #7fe772;
     /* color: white; */
+}
+
+#submit-message {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-family: 'Arvo', serif;
 }
 
 button:focus {
@@ -482,7 +492,7 @@ html {
   .login-background {
     background-color: rgba(0, 0, 0, 0.6);
     position: absolute;
-    height: 200%;
+    height: 1600px;
     width: 100%;
     top: 0;
   }
