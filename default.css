@@ -7,14 +7,44 @@
     --blue: #18172c;
     --green: #00d084;
     --pink: #ff4b77;
+
+    --background: #5cdb95;
+    --container-background: #8ee4af;
+    --dark-blue: #05386b;
+    --off-white: #edf5e1;
+    --dark-green: #379683;
 }
 
-html, body {
+body {
     padding: 0;
     margin: 0;
+    margin-top: 60px;
     font-family: 'Arvo', serif;
     color: var(--blue);
     /* overflow: hidden; */
+    background-color: var(--background);
+    background-image: url(./assets/pngfuel.com.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* background-position: right;  */
+    background-position: 91%; 
+}
+
+input {
+  background-color: var(--off-white);
+}
+
+input::placeholder {
+  color: var(--dark-blue);
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+  opacity: 1;
+}
+
+.popup-input {
+  background-color: var(--background);
 }
 
 .mh2 {
@@ -23,17 +53,19 @@ html, body {
     margin-right: 3px;
     font-size: 24px;
     font-weight: bold;
+    color: var(--dark-blue);
 }
 
 .mh3 {
     font-weight: bold;
     font-size: 18px;
     font-weight: bold;
+    color: var(--dark-blue);
 }
 
 .main-container {
-    border: 1px solid black;
-    border-radius: 8px;
+    /* border: 1px solid black; */
+    /* border-radius: 8px; */
     width: 95%;
     margin-left: auto;
     margin-right: auto;
@@ -41,13 +73,16 @@ html, body {
     margin-bottom: 35px;
     height: auto;
     padding-bottom: 20px;
-}
+    /* background-color: var(--container-background); */
+    background-color: transparent;
+  }
 
 .header {
     text-align: center;
     font-size: 40px;
     padding-top: 15px;
     padding-bottom: 10px;
+    color: var(--dark-blue);
 }
 
 .irrigate-by-minutes-wrapper {
@@ -111,6 +146,7 @@ html, body {
 
 .time-label {
     cursor: default;
+    color: var(--dark-blue);
 }
 
 #time {
@@ -220,7 +256,9 @@ html {
     width: 7em;
     height: 4em;
     overflow: hidden;
-    border-bottom: 0.5em solid #eee;
+    /* border-bottom: 0.5em solid #eee; */
+    border-bottom: 0.5em solid rgb(225, 243, 207);
+    border-radius: 5px;
   }
   
   .rocker-small {
@@ -236,8 +274,12 @@ html {
     right: 0;
     bottom: 0;
     background-color: #999;
-    border: 0.5em solid #eee;
+    /* border: 0.5em solid #eee; */
+    border: 0.5em solid rgb(225, 243, 207);
     border-bottom: 0;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+
   }
   
   .rocker input {
@@ -533,19 +575,22 @@ html {
     width: 300px;
     height: 400px;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 0px 15px;
+    background-color: var(--off-white);
+    border: 3px solid var(--dark-blue);
   }
 
   .signin-label {
       font-weight: bold;
       font-size: 22px;
       margin-bottom: 30px;
+      color: var(--dark-blue);
   }
 
   .popup-input {
@@ -572,7 +617,7 @@ html {
   .signup, .logout-button {
       margin-top: 30px;
       margin-right: 40px;
-      color: blue;
+      color: var(--dark-blue);
       border: none;
       background: none;
       cursor: pointer;
