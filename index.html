@@ -339,12 +339,12 @@
                             "thursday":$("#5").is(':checked'),
                             "friday":$("#6").is(':checked'),
                             "saturday":$("#7").is(':checked'),
-                            "firstRoundStart":`${cycle1StartTime.split(":")[0]}:${cycle1StartTime.split(":")[1]}:00`,
-                            "firstRoundEnd":`${cycle1EndTime.split(":")[0]}:${cycle1EndTime.split(":")[1]}:00`,
-                            "secondRoundStart":`${cycle2StartTime.split(":")[0]}:${cycle2StartTime.split(":")[1]}:00`,
-                            "secondRoundEnd":`${cycle2EndTime.split(":")[0]}:${cycle2EndTime.split(":")[1]}:00`,
-                            "thirdRoundStart":`${cycle3StartTime.split(":")[0]}:${cycle3StartTime.split(":")[1]}:00`,
-                            "thirdRoundEnd":`${cycle3EndTime.split(":")[0]}:${cycle3EndTime.split(":")[1]}:00`,
+                            "firstRoundStart":cycle1StartTime === null ? null : `${cycle1StartTime.split(":")[0]}:${cycle1StartTime.split(":")[1]}:00`,
+                            "firstRoundEnd":cycle1EndTime === null ? null : `${cycle1EndTime.split(":")[0]}:${cycle1EndTime.split(":")[1]}:00` || `${$(".time1Start").val()}:00`,
+                            "secondRoundStart":cycle2StartTime === null ? null : `${cycle2StartTime.split(":")[0]}:${cycle2StartTime.split(":")[1]}:00` || `${$(".time1Start").val()}:00`,
+                            "secondRoundEnd":cycle2EndTime === null ? null : `${cycle2EndTime.split(":")[0]}:${cycle2EndTime.split(":")[1]}:00` || `${$(".time1Start").val()}:00`,
+                            "thirdRoundStart":cycle3StartTime === null ? null : `${cycle3StartTime.split(":")[0]}:${cycle3StartTime.split(":")[1]}:00` || `${$(".time1Start").val()}:00`,
+                            "thirdRoundEnd":cycle3EndTime === null ? null : `${cycle3EndTime.split(":")[0]}:${cycle3EndTime.split(":")[1]}:00`,
                             "isFirstRoundActive": $("#cycle1").is(':checked'),
                             "isSecondRoundActive": $("#cycle2").is(':checked'),
                             "isThirdRoundActive": $("#cycle3").is(':checked')
@@ -384,6 +384,8 @@
                                                 },
                         error: function(error) {
                             console.log(error);
+                            $("#signin-error-message").text("There was a problem");
+                            $("#signin-error-message").show();
                         }
                     })
                 } else {
