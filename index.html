@@ -1,684 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel='icon' href='./favicon.ico' type='image/x-icon'>
+    <link rel="stylesheet" type="text/css" href="default.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Irrigation System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-/* @import "compass/css3"; */
+</head>
+<body>
+    <form class="main-container">
+        <div class="header">Smart Irrigation System</div>
+        <div class="irrigate-by-minutes-wrapper">
+            <button class="irrigate-by-minutes-button">Irrigate By Minutes</button>
+        </div>
+        <div class="main-body">
+            <div class="wrapper">
 
-:root {
-    --white: #e8e9ed;
-    --gray: #434257;
-    --blue: #18172c;
-    --green: #00d084;
-    --pink: #ff4b77;
-
-    --background: #5cdb95;
-    --container-background: #8ee4af;
-    --dark-blue: #05386b;
-    --off-white: #edf5e1;
-    --dark-green: #379683;
-}
-
-body {
-    padding: 0;
-    margin: 0;
-    margin-top: 60px;
-    font-family: 'Arvo', serif;
-    color: var(--blue);
-    /* overflow: hidden; */
-    background-color: var(--background);
-    background-image: url(./assets/pngfuel.com.png);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    /* background-position: right;  */
-    background-position: 91%; 
-}
-
-input {
-  background-color: var(--off-white);
-}
-
-input::placeholder {
-  color: var(--dark-blue);
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {  
-  opacity: 1;
-}
-
-.popup-input {
-  background-color: var(--background);
-}
-
-.mh2 {
-    text-align: center;
-    margin-top: 35px;
-    margin-right: 3px;
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--dark-blue);
-}
-
-.mh3 {
-    font-weight: bold;
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--dark-blue);
-}
-
-.main-container {
-    /* border: 1px solid black; */
-    /* border-radius: 8px; */
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 35px;
-    margin-bottom: 35px;
-    height: auto;
-    padding-bottom: 20px;
-    /* background-color: var(--container-background); */
-    background-color: transparent;
-  }
-
-.header {
-    text-align: center;
-    font-size: 40px;
-    padding-top: 15px;
-    padding-bottom: 10px;
-    color: var(--dark-blue);
-}
-
-.irrigate-by-minutes-wrapper {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.irrigate-by-minutes-button {
-  font-size: 22px;
-  padding: 5px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  overflow: hidden;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: color, background-color;
-  transition-property: color, background-color;
-
-}
-
-.main-body {
-    display: flex;
-    justify-content: center;
-}
-
-.week {
-    max-width: 460px;
-}
-
-.wrapper {
-    flex: 1;
-    margin: 20px;
-    margin-top: 0;
-    max-width: 420px;
-}
-
-.cycles {
-    padding-top: 19px;
-}
-
-.header-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.time-picker-wrapper {
-    text-align: center;
-    display: grid;
-    margin: 3px;
-}
-
-.time-picker {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.time-label {
-    cursor: default;
-    color: var(--dark-blue);
-}
-
-#time {
-    width: 192px;
-    height: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.save-wrapper {
-    text-align: center;
-    padding: 17px;
-}
-
-.submit-button {
-    font-size: 28px;
-    border-radius: 8px;
-    padding: 5px;
-    padding-left: 50px;
-    padding-right: 50px;
-    cursor: pointer;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    overflow: hidden;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    -webkit-transition-property: color, background-color;
-    transition-property: color, background-color;
-}
-
-.submit-button:hover {
-    background-color: #7fe772;
-    /* color: white; */
-}
-
-#submit-message,  #error-message-irrigate-by-minutes{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    font-family: 'Arvo', serif;
-    font-size: 24px;
-}
-
-button:focus {
-    outline: 0;
-}
-
-
-/* Rocker Toggle Switch */
-html {
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-    font-size: 100%;
-  }
-  *, *:before, *:after {
-    box-sizing: inherit;
-    margin:0;
-    padding:0;
-  }
-  .mid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  
-  /* Switch starts here */
-  html {
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-    font-size: 100%;
-  }
-  *, *:before, *:after {
-    box-sizing: inherit;
-    margin:0;
-    padding:0;
-  }
-  .mid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top:1em;
-  }
-  
-  
-  /* Switch starts here */
-  .rocker {
-    display: inline-block;
-    position: relative;
-    /*
-    SIZE OF SWITCH
-    ==============
-    All sizes are in em - therefore
-    changing the font-size here
-    will change the size of the switch.
-    See .rocker-small below as example.
-    */
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-    color: #888;
-    width: 7em;
-    height: 4em;
-    overflow: hidden;
-    /* border-bottom: 0.5em solid #eee; */
-    border-bottom: 0.5em solid rgb(225, 243, 207);
-    border-radius: 5px;
-  }
-  
-  .rocker-small {
-    font-size: 0.75em; /* Sizes the switch */
-    margin: 1em;
-  }
-  
-  .rocker::before {
-    content: "";
-    position: absolute;
-    top: 0.5em;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #999;
-    /* border: 0.5em solid #eee; */
-    border: 0.5em solid rgb(225, 243, 207);
-    border-bottom: 0;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-
-  }
-  
-  .rocker input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .switch-left,
-  .switch-right {
-    cursor: pointer;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.5em;
-    width: 3em;
-    transition: 0.2s;
-  }
-  
-  .switch-left {
-    height: 2.4em;
-    width: 2.75em;
-    left: 0.85em;
-    bottom: 0.4em;
-    background-color: #ddd;
-    transform: rotate(15deg) skewX(15deg);
-  }
-  
-  .switch-right {
-    right: 0.5em;
-    bottom: 0;
-    background-color: #bd5757;
-    color: #fff;
-  }
-  
-  .switch-left::before,
-  .switch-right::before {
-    content: "";
-    position: absolute;
-    width: 0.4em;
-    height: 2.45em;
-    bottom: -0.45em;
-    background-color: #ccc;
-    transform: skewY(-65deg);
-  }
-  
-  .switch-left::before {
-    left: -0.4em;
-  }
-  
-  .switch-right::before {
-    right: -0.375em;
-    background-color: transparent;
-    transform: skewY(65deg);
-  }
-  
-  input:checked + .switch-left {
-    background-color: #0084d0;
-    color: #fff;
-    bottom: 0px;
-    left: 0.5em;
-    height: 2.5em;
-    width: 3em;
-    transform: rotate(0deg) skewX(0deg);
-  }
-  
-  input:checked + .switch-left::before {
-    background-color: transparent;
-    width: 3.0833em;
-  }
-  
-  input:checked + .switch-left + .switch-right {
-    background-color: #ddd;
-    color: #888;
-    bottom: 0.4em;
-    right: 0.8em;
-    height: 2.4em;
-    width: 2.75em;
-    transform: rotate(-15deg) skewX(-15deg);
-  }
-  
-  input:checked + .switch-left + .switch-right::before {
-    background-color: #ccc;
-  }
-  
-  /* Keyboard Users */
-  input:focus + .switch-left {
-    color: #333;
-  }
-  
-  input:checked:focus + .switch-left {
-    color: #fff;
-  }
-  
-  input:focus + .switch-left + .switch-right {
-    color: #fff;
-  }
-  
-  input:checked:focus + .switch-left + .switch-right {
-    color: #333;
-  }
-/* End Rocker Toggle Switch */
-
-/* Switches */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
-  
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  ol.switches {
-    list-style: none;
-  }
-  
-  label {
-    cursor: pointer;
-  }
-  
-  [type="checkbox"] {
-    position: absolute;
-    left: -9999px;
-  }
+                <div class="wrapper">
+                    <div class="cycles">
+                        <div class="cycle">
+                            <div class="header-wrapper">
+                                <span class="mh2">First Cycle</span>
+                                <div class="mid">
+                                    <label class="rocker rocker-small">
+                                    <input type="checkbox" id="cycle1">
+                                    <span class="switch-left">ON</span>
+                                    <span class="switch-right">OFF</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="time-picker">
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">Start</label>
+                                    <input type="time" name="time" id="time" class="time1Start" />
+                                </div>
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">End</label>
+                                    <input type="time" name="time" id="time" class="time1End" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cycle">
+                            <div class="header-wrapper">
+                                <span class="mh2">Second Cycle</span>
+                                <div class="mid">
+                                    <label class="rocker rocker-small">
+                                    <input type="checkbox" id="cycle2">
+                                    <span class="switch-left">ON</span>
+                                    <span class="switch-right">OFF</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="time-picker">
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">Start</label>
+                                    <input type="time" name="time" id="time" class="time2Start" />
+                                </div>
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">End</label>
+                                    <input type="time" name="time" id="time" class="time2End" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cycle">
+                            <div class="header-wrapper">
+                                <span class="mh2">Third Cycle</span>
+                                <div class="mid">
+                                    <label class="rocker rocker-small">
+                                    <input type="checkbox" id="cycle3">
+                                    <span class="switch-left">ON</span>
+                                    <span class="switch-right">OFF</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="time-picker">
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">Start</label>
+                                    <input type="time" name="time" id="time" class="time3Start" />
+                                </div>
+                                <div class="time-picker-wrapper">
+                                    <label class="time-label">End</label>
+                                    <input type="time" name="time" id="time" class="time3End" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
     
-  
-  .switches {
-    max-width: 500px;
-    width: 95%;
-    margin: 50px auto 0;
-    border-radius: 5px;
-    color: var(--blue);
-    /* background: var(--white); */
-    /* background: white; */
-    border: 2px solid var(--blue);
-  }
-  
-  .switches li {
-    position: relative;
-    counter-increment: switchCounter;
-  }
-  
-  .switches li:not(:last-child) {
-    border-bottom: 2px solid var(--gray);
-  }
-  
-  .switches li::before {
-    /* content: counter(switchCounter); */
-    position: absolute;
-    top: 50%;
-    left: -30px;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--pink);
-  }
-  
-  .switches label {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-  }
-  
-  .switches span:last-child {
-    position: relative;
-    width: 50px;
-    height: 26px;
-    border-radius: 15px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
-    background: #C6C6C6;
-    transition: all 0.3s;
-  }
-  
-  .switches span:last-child::before,
-  .switches span:last-child::after {
-    content: "";
-    position: absolute;
-  }
-  
-  .switches span:last-child::before {
-    left: 1px;
-    top: 1px;
-    width: 24px;
-    height: 24px;
-    background: var(--white);
-    border-radius: 50%;
-    z-index: 1;
-    transition: transform 0.3s;
-  }
-  
-  .switches span:last-child::after {
-    top: 50%;
-    right: 8px;
-    width: 12px;
-    height: 12px;
-    transform: translateY(-50%);
-    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/uncheck-switcher.svg);
-    background-size: 12px 12px;
-  }
-  
-  .switches [type="checkbox"]:checked + label span:last-child {
-    background: var(--green);
-  }
-  
-  .switches [type="checkbox"]:checked + label span:last-child::before {
-    transform: translateX(24px);
-  }
-  
-  .switches [type="checkbox"]:checked + label span:last-child::after {
-    width: 14px;
-    height: 14px;
-    /*right: auto;*/
-    left: 8px;
-    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/checkmark-switcher.svg);
-    background-size: 14px 14px;
-  }
-  
-  @media screen and (max-width: 600px) {
-    .switches li::before {
-      display: none;
-    }
-  }
-  
-  /* FOOTER
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  .page-footer {
-    font-size: 14px;
-    text-align: right;
-    margin-top: 20px;
-    padding-right: 20px;
-  }
-  
-  .page-footer span {
-    color: var(--pink);
-  }
-/* End Switches */
+                </div>
 
-/* Time Picker */
-html {
-    --color: var(--gray);
-    --bgColor: #d89;
-    --size: 2rem;
-    --border: calc(var(--size) * 0.125);
-    --borderRadius: calc(var(--size) * 0.5);
-    --labelSize: calc(var(--size) * 0.75);
-    --margin: calc(var(--size) * 0.22);
-    --marginLeft: calc(var(--size) + calc(var(--size) * 0.5));
-  }
+                <div class="week">     
+                    
+                    <ol class="switches">
+                        <li>
+                            <input type="checkbox" id="1" class="switch-input">
+                            <label for="1">
+                                <span class="mh3">Sunday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="2">
+                            <label for="2">
+                                <span class="mh3">Monday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="3">
+                            <label for="3">
+                                <span class="mh3">Tuesday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="4">
+                            <label for="4">
+                                <span class="mh3">Wednesday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="5">
+                            <label for="5">
+                                <span class="mh3">Thursday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="6">
+                            <label for="6">
+                                <span class="mh3">Friday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="7">
+                            <label for="7">
+                                <span class="mh3">Saturday</span>
+                                <span></span>
+                            </label>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="save-wrapper">
+            <button type="submit" class="submit-button">Save</button>
+            <div id="submit-message"><p></p></div>
+        </div>
+        <div class="logout-wrapper">
+            <button class="logout-button" id="logout-button">Logout</button>
+        </div>
+
+    </form>
+
+    <div class="login-background"></div>
+
+    <form class="login-wrapper" id="login-popup">
+        <div class="login-popup">
+            <span class="signin-label">Sign in</span>
+            <input type="text" placeholder="Email" class="popup-input" id="email-input-signin" required>
+            <input type="password" placeholder="Password" class="popup-input" id="password-input-signin" required>
+            <button type="submit" class="login-button" id="signin-submit">Submit</button>
+            <span id="signin-error-message" class="error-message"></span>
+            <div class="signup-wrapper">
+                <button class="signup" id="signup">Sign up</button>
+            </div>
+        </div>
+    </form>
+
+    <form class="login-wrapper" id="signup-popup">
+        <div class="login-popup">
+            <span class="signin-label">Sign up</span>
+            <input type="text" placeholder="Email" class="popup-input" id="email-input-signup" required>
+            <input type="password" placeholder="Password" class="popup-input" id="password-input-signup" required>
+            <input type="text" placeholder="Dataplicity" class="popup-input" id="dataplicity-input-signup" required>
+            <button type="submit" class="login-button" id="signup-submit">Submit</button>
+            <span id="signup-error-message" class="error-message"></span>
+            <div class="signup-wrapper">
+                <button class="signup" id="back-to-login">Back to login</button>
+            </div>
+        </div>
+    </form>
+
+    <form class="login-wrapper" id="irrigate-by-minutes">
+        <div class="login-popup">
+            <span class="signin-label">For how long would you like to irrigate?</span>
+            <input type="number" placeholder="Enter Minutes" class="popup-input" id="minutes-input" required>
+            <div class="buttons-wrapper">
+                <button class="login-button" id="close-button">Close</button>
+                <button type="submit" class="login-button" id="irrigate-by-mintues-submit">Submit</button>
+            </div>
+            <div id="error-message-irrigate-by-minutes"><p></p></div>
+        </div>
+    </form>
+
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-analytics.js"></script>
   
-  #time {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><circle cx='20' cy='20' r='18.5' fill='none' stroke='%23222' stroke-width='3' /><path d='M20,4 20,8 M4,20 8,20 M36,20 32,20 M20,36 20,32' stroke='%23bbb' stroke-width='1' /><circle cx='20' cy='20' r='2' fill='%23222' stroke='%23222' stroke-width='2' /></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><path d='M18.5,24.5 19.5,4 20.5,4 21.5,24.5 Z' fill='%23222' style='transform:rotate(120deg); transform-origin: 50% 50%;' /></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><path d='M18.5,24.5 19.5,8.5 20.5,8.5 21.5,24.5 Z' style='transform:rotate(20deg); transform-origin: 50% 50%;' /></svg>");
-    background-position: var(--margin) 50%;
-    background-repeat: no-repeat;
-    background-size: var(--size) var(--size);
-    border: 2px solid var(--color);
-    border-radius: var(--borderRadius);
-    color: #222;
-    font-size: var(--size);
-    padding: var(--margin) var(--margin) var(--margin) var(--marginLeft);
-    transition: backgroundImage 0.25s;
-  }
-
-  #time:focus {
-    outline: 0;
-  }
-  /* End Time Picker */
-
-  .login-background {
-    background-color: rgba(0, 0, 0, 0.6);
-    position: absolute;
-    height: 1600px;
-    width: 100%;
-    top: 0;
-  }
-
-  .login-wrapper {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Arial', sans-serif;
-  }
-
-  .login-popup {
-    width: 300px;
-    height: 400px;
-    background-color: white;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0px 15px;
-    background-color: var(--off-white);
-    border: 3px solid var(--dark-blue);
-  }
-
-  .signin-label {
-      font-weight: bold;
-      font-size: 22px;
-      margin-bottom: 30px;
-      color: var(--dark-blue);
-  }
-
-  .popup-input {
-    margin: 7px;
-    height: 30px;
-    font-size: 16px;
-    font-style: var(--blue);
-    text-align: center;
-    width: 70%;
-  }
-
-  .login-button {
-    padding: 3px 15px;
-    font-size: 18px;
-    margin-top: 18px;
-    cursor: pointer;
-  }
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCmWhdLsNWdcoy5n73aVuX2Wb17Qkw4MKw",
+      authDomain: "smart-irrigation-system-854fa.firebaseapp.com",
+      databaseURL: "https://smart-irrigation-system-854fa.firebaseio.com",
+      projectId: "smart-irrigation-system-854fa",
+      storageBucket: "smart-irrigation-system-854fa.appspot.com",
+      messagingSenderId: "175621433547",
+      appId: "1:175621433547:web:f80840fa5b9790147cd34e",
+      measurementId: "G-C6JDMHJCFC"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   
-  .signup-wrapper {
-    width: 100%;
-    text-align: right;
-  }
-
-  .signup, .logout-button {
-      margin-top: 30px;
-      margin-right: 40px;
-      color: var(--dark-blue);
-      border: none;
-      background: none;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: bold;
-  }
-
-  #logout-button {
-    margin-left: 25px;
-  }
-
-  .error-message {
-      padding-top: 20px;
-      color: red;
-      font-size: 14px;
-      text-align: center;
-  }
-
-  #close-button {
-    margin-right: 5px;
-  }
-
-  @media screen and (max-width: 550px) {
-
-    .mh2 {
-        font-size: 21px;
-    }
-
-    .main-container {
-        border: none;
-        margin-bottom: 0px;
-    }
-
-    .header {
-        font-size: 30px;
-    }
-
-    .week {
-        max-width: 350px;
-    }
     
-    .wrapper {
-        max-width: 350px;
-        margin: 0px;
-    }
+    <script type="text/javascript">
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        let userEmail;
+        var provider = new firebase.auth.GoogleAuthProvider();
 
-    .time-picker {
-        flex-direction: column;
-    }
+        document.querySelector("#time").addEventListener("input", function(e) {
+        const reTime = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
+        const time = this.value;
+            if (reTime.exec(time)) {
+                const minute = Number(time.substring(3,5));
+                const hour = Number(time.substring(0,2)) % 12 + (minute / 60);
+                this.style.backgroundImage = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><circle cx='20' cy='20' r='18.5' fill='none' stroke='%23222' stroke-width='3' /><path d='M20,4 20,8 M4,20 8,20 M36,20 32,20 M20,36 20,32' stroke='%23bbb' stroke-width='1' /><circle cx='20' cy='20' r='2' fill='%23222' stroke='%23222' stroke-width='2' /></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><path d='M18.5,24.5 19.5,4 20.5,4 21.5,24.5 Z' fill='%23222' style='transform:rotate(${360 * minute / 60}deg); transform-origin: 50% 50%;' /></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><path d='M18.5,24.5 19.5,8.5 20.5,8.5 21.5,24.5 Z' style='transform:rotate(${360 * hour / 12}deg); transform-origin: 50% 50%;' /></svg>")`;
+            }
+        });
 
-    .time-picker-wrapper {
-        margin-bottom: 15px;
-    }
+        $(document).ready(function() {
+            $("#signup-popup").hide();
+            $("#irrigate-by-minutes").hide();
+        });
 
-    #time {
-        width: 230px;
-        --marginLeft: calc(var(--size) + calc(var(--size) * 1.3));
-    }
+        $("#signup").click(function(e) {
+            e.preventDefault();
+            $("#login-popup").hide();
+            $("#signup-popup").show();
+        })
 
-    .save-wrapper {
-        padding-top: 40px;
-    }
-  }
+        $("#back-to-login").click(function(e) {
+            e.preventDefault();
+            $("#login-popup").show();
+            $("#signup-popup").hide();
+        })
+
+        $("#signup-popup").submit(function(e) {
+            e.preventDefault();
+            const email = $("#email-input-signup").val();
+            const password = $("#password-input-signup").val();
+            const dataplicityWormhole = $("#dataplicity-input-signup").val();
+            $.ajax({
+                url: `${dataplicityWormhole}/get_week`,
+                type: "GET",
+                success: function(response) {
+                    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+                    db.collection("users").doc(email).set({
+                        dataplicity: dataplicityWormhole
+                    });
+                    userEmail = email;
+                    console.log(response);
+                    drowData(response);
+                    }, function(error) {
+                        $("#signup-error-message").text(error.message);
+                        $("#signup-error-message").show();
+                    });
+
+                },
+                error: function(error) {
+                    console.log(error);
+                    $("#signup-error-message").text("Incorrect Dataplicity wormhole");
+                }
+            })
+        });
+
+        $("#login-popup").submit(function(e) {
+            e.preventDefault();
+            const email = $("#email-input-signin").val();
+            const password = $("#password-input-signin").val();
+            auth.signInWithEmailAndPassword(email, password).then(cred => {
+                userEmail = email;
+                login();
+            }, function(err) {
+                $("#signin-error-message").text(err.message);
+                $("#signin-error-message").show();
+            });
+        });
+
+        $("#logout-button").click(function(e) {
+            e.preventDefault();
+            auth.signOut().then(cred => {
+                $("#login-popup").show();
+                $("#login-popup").trigger('reset');
+                $("#logup-popup").trigger('reset');
+                $(".login-background").show();
+                $(".login-background").trigger('reset');
+                $(".main-container").trigger('reset');
+                $("#signin-error-message").hide();
+                $("#signup-error-message").hide();
+                userEmail = "";
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }, function(error) {
+                console.log(errror.message);
+            });
+        });
+
+        $(".main-container").submit(function(e) {
+            e.preventDefault();
+            $("#submit-message").text("Loading...");
+            $("#submit-message").css('color', 'black');
+
+            $(".time1Start").val() === "" ? cycle1StartTime = null : cycle1StartTime = `${$(".time1Start").val()}`;
+            $(".time1End").val() === "" ? cycle1EndTime = null : cycle1EndTime = `${$(".time1End").val()}`;
+            $(".time2Start").val() === "" ? cycle2StartTime = null : cycle2StartTime = `${$(".time2Start").val()}`;
+            $(".time2End").val() === "" ? cycle2EndTime = null : cycle2EndTime = `${$(".time2End").val()}`;
+            $(".time3Start").val() === "" ? cycle3StartTime = null : cycle3StartTime = `${$(".time3Start").val()}`;
+            $(".time3End").val() === "" ? cycle3EndTime = null : cycle3EndTime = `${$(".time3End").val()}`;
+
+            db.collection("users").doc(userEmail).get().then(function(user) {
+                if (user.exists) {
+
+                    $.ajax({
+                        url: `${user.data()["dataplicity"]}/update_week`,
+                        type: "POST",
+                        data:                         
+                            JSON.stringify({
+                            "sunday":$("#1").is(':checked'),
+                            "monday":$("#2").is(':checked'),
+                            "tuesday":$("#3").is(':checked'),
+                            "wednesday":$("#4").is(':checked'),
+                            "thursday":$("#5").is(':checked'),
+                            "friday":$("#6").is(':checked'),
+                            "saturday":$("#7").is(':checked'),
+                            "firstRoundStart":cycle1StartTime === null ? null : `${cycle1StartTime.split(":")[0]}:${cycle1StartTime.split(":")[1]}:00`,
+                            "firstRoundEnd":cycle1EndTime === null ? null : `${cycle1EndTime.split(":")[0]}:${cycle1EndTime.split(":")[1]}:00` || `${$(".time1Start").val()}:00`,
+                            "secondRoundStart":cycle2StartTime === null ? null : `${cycle2StartTime.split(":")[0]}:${cycle2StartTime.split(":")[1]}:00` || `${$(".time1Start").val()}:00`,
+                            "secondRoundEnd":cycle2EndTime === null ? null : `${cycle2EndTime.split(":")[0]}:${cycle2EndTime.split(":")[1]}:00` || `${$(".time1Start").val()}:00`,
+                            "thirdRoundStart":cycle3StartTime === null ? null : `${cycle3StartTime.split(":")[0]}:${cycle3StartTime.split(":")[1]}:00` || `${$(".time1Start").val()}:00`,
+                            "thirdRoundEnd":cycle3EndTime === null ? null : `${cycle3EndTime.split(":")[0]}:${cycle3EndTime.split(":")[1]}:00`,
+                            "isFirstRoundActive": $("#cycle1").is(':checked'),
+                            "isSecondRoundActive": $("#cycle2").is(':checked'),
+                            "isThirdRoundActive": $("#cycle3").is(':checked')
+                        }),
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            $("#submit-message").text("Saved!");
+                            $("#submit-message").css('color', 'green');
+                        },
+                        error: function(error) {
+                            console.log(error);
+                            $("#submit-message").text("There was a problem");
+                            $("#submit-message").css('color', 'red');
+                        }
+                    })
+
+                } else {
+                    console.log("No such document");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+        });
+
+        function login() {
+            db.collection("users").doc(userEmail).get().then(function(user) {
+                if (user.exists) {
+                    $.ajax({
+                        url: `${user.data()["dataplicity"]}/get_week`,
+                        type: "GET",
+                        success: function(response) {
+                            console.log(response);
+                            drowData(response);
+                                                },
+                        error: function(error) {
+                            console.log(error);
+                            $("#signin-error-message").text("There was a problem");
+                            $("#signin-error-message").show();
+                        }
+                    })
+                } else {
+                    console.log("No such document");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });  
+        };
+
+        function drowData(response) {
+            $("#signup-popup").hide();
+            $("#login-popup").hide();
+            $(".login-background").hide();
+
+            // set dom objects:
+            $("#cycle1").prop('checked', response["isFirstRoundActive"]);
+            $("#cycle2").prop('checked', response["isSecondRoundActive"]);
+            $("#cycle3").prop('checked', response["isThirdRoundActive"]);
+
+            $(".time1Start").val(response["firstRoundStart"]);
+            $(".time1End").val(response["firstRoundEnd"]);
+            $(".time2Start").val(response["secondRoundStart"]);
+            $(".time2End").val(response["secondRoundEnd"]);
+            $(".time3Start").val(response["thirdRoundStart"]);
+            $(".time3End").val(response["thirdRoundEnd"]);
+
+            $("#1").prop('checked', response["sunday"]);
+            $("#2").prop('checked', response["monday"]);
+            $("#3").prop('checked', response["tuesday"]);
+            $("#4").prop('checked', response["wednesday"]);
+            $("#5").prop('checked', response["thursday"]);
+            $("#6").prop('checked', response["friday"]);
+            $("#7").prop('checked', response["saturday"]);
+
+        }
+        
+        $(".irrigate-by-minutes-button").click(function(e) {
+            e.preventDefault();
+            $(".login-background").show();
+            $("#irrigate-by-minutes").show();
+        });
+
+        $("#irrigate-by-minutes").submit(function(e) {
+            e.preventDefault();
+
+            db.collection("users").doc(userEmail).get().then(function(user) {
+                if (user.exists) {
+
+                    $.ajax({
+                        url: `${user.data()["dataplicity"]}/irrigate_by_minutes/${$("#minutes-input").val()}`,
+                        type: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            $(".login-background").hide();
+                            $("#irrigate-by-minutes").hide();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                            $("#error-message-irrigate-by-minutes").text("There was a problem");
+                            $("#error-message-irrigate-by-minutes").css('color', 'red');
+                        }
+                    })
+
+                } else {
+                    console.log("No such document");
+                    $("#error-message-irrigate-by-minutes").text("There was a problem");
+                    $("#error-message-irrigate-by-minutes").css('color', 'red');
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+                $("#error-message-irrigate-by-minutes").text("There was a problem");
+                $("#error-message-irrigate-by-minutes").css('color', 'red');
+
+            });
+
+        });
+
+        $("#close-button").click(function(e) {
+            e.preventDefault();
+            $(".login-background").hide();
+            $("#irrigate-by-minutes").hide();
+        });
+
+        
+    </script>
+</body>
+</html>
